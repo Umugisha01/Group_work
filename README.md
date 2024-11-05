@@ -121,4 +121,18 @@ BEGIN
     END LOOP;
 END calculate_attendance_stats;
 /
+```
+### Key Components
+
+1. Input Parameters: p_month and p_year filter attendance records by month and year.
+
+
+2. Employee Cursor: Loops through each employee in the Employees table.
+
+
+3. Attendance Counts: Counts 'Present' and 'Absent' days using SELECT COUNT based on the status.
+
+
+4. Output Display: Shows the employee’s name, total presents, absents, and attendance percentage.
+---
 
