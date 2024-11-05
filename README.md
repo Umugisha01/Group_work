@@ -169,3 +169,29 @@ No attendance records found for the specified month.
 --------------------------
 ```
 ---
+## 6.Error Handling
+
+The procedure uses logic to check if attendance records exist for an employee in the specified month:
+
+If records exist, it calculates and displays the attendance stats.
+
+If no records exist, it displays a message indicating no records found.
+
+---
+
+## 7.Testing
+
+For accurate testing, try different month and year values:
+
+1. Normal Case: A month with some 'Present' and 'Absent' days.
+
+
+2. No Records Case: A month with no attendance records.
+
+
+3. Edge Case: Employees with only 'Present' or only 'Absent' days.
+
+---
+## 8.Conclusion
+
+This Employee Attendance Analysis project efficiently calculates monthly attendance statistics, providing clear insights into employee presence and absence patterns. It’s a simple, effective tool for supporting workforce management and data-driven decisions.
