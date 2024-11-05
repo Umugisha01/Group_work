@@ -1,4 +1,16 @@
 # Group_work
+---
+# GROUP MEMBERS:
+1. MUYOBOKE pacifique 26777
+2. NSONERA Hirwa Dylan 25520
+3. ICYEZA Kundwa Gloire Nelly 26743
+4. BUMUGISHA Neema Christian 26460
+5. BYIRINGIRO Blaise 27023
+6. MUKESHIMANA Janice Dorcas 26640
+7. RUBAYIZA CYUZUZO Benny Gabriel 26908
+8. NSHUTI kevin 26770
+9. KWIZERA NIYO Mackenzie 26952
+---
 # Employee Attendance Analysis Procedure
 
 This repository contains a PL/SQL procedure, calculate_attendance_stats, that analyzes and displays attendance statistics for employees within a specified month and year. The procedure loops through employee attendance records, calculates the number of 'Present' and 'Absent' days, and displays the results, including the attendance percentage.
