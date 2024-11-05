@@ -54,7 +54,7 @@ This procedure provides a helpful utility for database developers to generate mo
 
 To use this procedure, two tables are required in our database: Employees and Attendance. Below are the table structures:
 
-sql
+```sql
 CREATE TABLE Employees (
     employee_id NUMBER PRIMARY KEY,
     first_name VARCHAR2(50),
@@ -67,8 +67,11 @@ CREATE TABLE Attendance (
     attendance_date DATE,
     status VARCHAR2(10) CHECK (status IN ('Present', 'Absent'))
 );
-
-Employees Table: Stores employee information, including employee_id, first_name, and last_name.
+```
+Employees Table: Stores employee information, including:  
+employee_id,  
+first_name,  
+and last_name.
 
 Attendance Table: Stores attendance records with an employee_id (foreign key) and status indicating if the employee was 'Present' or 'Absent' on that date.
 ## 3.Procedure Details
@@ -151,11 +154,11 @@ END calculate_attendance_stats;
 
 To use this procedure, call it in SQL with the month and year as input parameters:
 
-sql
+```sql
 BEGIN
     calculate_attendance_stats(10, 2024);  -- Example: October 2024
 END;
-
+```
 
 ### Requirements
 
