@@ -135,4 +135,37 @@ END calculate_attendance_stats;
 
 4. Output Display: Shows the employee’s name, total presents, absents, and attendance percentage.
 ---
+## 4.Usage
 
+To use this procedure, call it in SQL with the month and year as input parameters:
+
+sql
+BEGIN
+    calculate_attendance_stats(10, 2024);  -- Example: October 2024
+END;
+
+
+### Requirements
+
+Oracle Database with Employees and Attendance tables created.
+
+Sufficient privileges to create and execute procedures.
+
+---
+
+## 5.Sample Output
+
+The output displays each employee's full name, total presents, absents, and attendance percentage. If no records exist for an employee in the specified month, it indicates this in the output.
+
+### Example:
+```sql
+Employee: John Doe
+Total Presents: 18
+Total Absents: 6
+Attendance Percentage: 75%
+--------------------------
+Employee: Jane Smith
+No attendance records found for the specified month.
+--------------------------
+```
+---
