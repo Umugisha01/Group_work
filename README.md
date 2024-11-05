@@ -38,3 +38,70 @@ This procedure provides a helpful utility for database developers to generate mo
 
 
 ---
+3.Procedure Details
+PL/SQL Code
+The main code for the procedure is shown below. The code uses a FOR loop to iterate through employees and a single query to count each employee’s attendance in the specified month.
+CREATE OR REPLACE PROCEDURE calculate_attendance_stats (
+    p_month IN NUMBER,
+    p_year IN NUMBER
+) AS
+    -- Variables for employee information and attendance counts
+    v_total_presents NUMBER := 0;
+    v_total_absents NUMBER := 0;
+    v_total_days_in_month NUMBER;
+    v_attendance_percentage NUMBER;
+
+    -- Cursor to loop through each employee
+    CURSOR emp_cursor IS
+        SELECT e.employee_id, e.first_name || ' ' || e.last_name AS full_name
+        FROM employees e;
+
+BEGIN
+    -- Calculate total days in the specified month
+    SELECT TO_NUMBER(TO_CHAR(LAST_DAY(TO_DATE(p_year || '-' || p_month || '-01', 'YYYY-MM-DD')), 'DD'))
+    INTO v_total_days_in_month
+    FROM dual;
+
+    -- Loop through each employee
+    FOR emp_record IN emp_cursor LOOP
+        -- Reset counts for each employee
+        v_total_presents := 0;
+        v_total_absents := 0;
+
+        -- Count attendance status for the employee in the specified month
+        SELECT COUNT(CASE WHEN status = 'Present' THEN 1 END),
+               COUNT(CASE WHEN status = 'Absent' THEN 1 END)
+        INTO v_total_presents, v_total_absents
+        FROM attendance
+        WHERE employee_id = emp_record.employee_id
+          AND EXTRACT(MONTH FROM attendance_date) = p_month
+          AND EXTRACT(YEAR FROM attendance_date) = p_year;
+
+        -- Calculate attendance percentage if there are records
+        IF v_total_presents + v_total_absents > 0 THEN
+            v_attendance_percentage := (v_total_presents / v_total_days_in_month) * 100;
+            
+            -- Display results
+            DBMS_OUTPUT.PUT_LINE('Employee: ' || emp_record.full_name);
+            DBMS_OUTPUT.PUT_LINE('Total Presents: ' || v_total_presents);
+            DBMS_OUTPUT.PUT_LINE('Total Absents: ' || v_total_absents);
+            DBMS_OUTPUT.PUT_LINE('Attendance Percentage: ' || ROUND(v_attendance_percentage, 2) || '%');
+        ELSE
+            -- Display message if no records for the month
+            DBMS_OUTPUT.PUT_LINE('Employee: ' || emp_record.full_name);
+            DBMS_OUTPUT.PUT_LINE('No attendance records found for the specified month.');
+        END IF;
+
+        DBMS_OUTPUT.PUT_LINE('--------------------------');
+    END LOOP;
+END calculate_attendance_stats;
+/
+Key Components
+1. Input Parameters: p_month and p_year filter attendance records by month and year.
+
+2. Employee Cursor: Loops through each employee in the Employees table.
+
+3. Attendance Counts: Counts 'Present' and 'Absent' days using SELECT COUNT based on the status.
+
+4. Output Display: Shows the employee’s name, total presents, absents, and attendance percentage.
+
